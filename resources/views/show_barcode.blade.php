@@ -10,34 +10,32 @@
 </head>
 
 <body>
-    <div class="container mt-5">
 
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-md-6">
-
-                    <form action="{{ route('home.index') }}" method="get">
-                        <div class="form-group">
-                            <label for="code">Typer any number code</label>
-                            <input type="text" name="code" placeholder="Type any number code">
-                            <input type="submit" class="btn btn-primary">
-                        </div>
-                    </form>
-
+            {{-- navbar start --}}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">Navbar</a>
+                 
+                 
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('create_barcode') }}">Create Barcode</a>
+                      </li>
+                    </ul>
+                   
+                  </div>
                 </div>
-            </div>
-        </div>
+              </nav>
+            {{-- navbar end --}}
+
+    <div class="container mt-4">
 
 
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table" style="overflow-x: auto;">
 
-
-        <div class="container mt-4">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered" style="width: 100%;"  style="overflow-x: auto;">
-                       
-                        <tr>
+                    {{-- <tr>
                             <th>1</th>
                             <th>2</th>
                             <th>3</th>
@@ -48,30 +46,25 @@
                             <th>8</th>
                             <th>9</th>
                             <th>10</th>
+                        </tr> --}}
+
+                    @for ($i = 1; $i <= $row; $i++)
+                        <tr>
+                            @for ($j = 1; $j <= $col; $j++)
+                                {{-- <td>{!! DNS1D::getBarcodeHTML("$code", 'C39') !!} </td> --}}
+                                <td>{!! DNS2D::getBarcodeHTML("$code", 'QRCODE') !!}</td>
+                            @endfor
                         </tr>
-        
-        
-        
-        
-        
-                        @for ($row = 1; $row <= 10; $row++)
-                            <tr>
-                                @for ($col = 1; $col <= 10; $col++)
-                                    <td>{!! DNS1D::getBarcodeHTML("$productCode", 'C39+') !!}</td>
-                                @endfor
-                            </tr>
-                        @endfor
-        
-        
-        
-        
-                    </table>
-                </div>
+                    @endfor
+                </table>
+                <!-- Print Button -->
+                <button onclick="printTable()">Print Table</button>
             </div>
+        </div>
 
-            
 
-            {{-- <div class="mb-3">{!! DNS2D::getBarcodeHTML("$productCode", 'QRCODE') !!}</div>
+
+        {{-- <div class="mb-3">{!! DNS2D::getBarcodeHTML("$productCode", 'QRCODE') !!}</div>
             <div class="mb-3">{!! DNS2D::getBarcodeHTML("$productCode", 'DATAMATRIX') !!}</div>
 
             <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C39') !!}</div>
@@ -86,10 +79,19 @@
             <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C128') !!}</div>
             <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C128A') !!}</div>
             <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C128B') !!}</div> --}}
-        </div>
+    </div>
 
 
     </div>
+
+
+
+     <!-- JavaScript to Trigger Print Dialog -->
+     <script>
+        function printTable() {
+            window.print();
+        }
+    </script>
 </body>
 
 </html>

@@ -18,4 +18,5 @@ Route::get('/', function () {
 });
 
 
-Route::get('/barcode', 'App\Http\Controllers\BarcodeController@index')->name('home.index');
+Route::get('/create-barcode', 'App\Http\Controllers\BarcodeController@index')->name('create_barcode');
+Route::post('/show-barcode', 'App\Http\Controllers\BarcodeController@showbarcode')->name('show_barcode');

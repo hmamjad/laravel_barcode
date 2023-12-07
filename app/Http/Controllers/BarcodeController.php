@@ -6,15 +6,27 @@ use Illuminate\Http\Request;
 
 class BarcodeController extends Controller
 {
-    public function index(Request $request) 
+    public function index() 
+    {
+
+        return view('create_barcode');
+    }
+
+
+
+    public function showbarcode(Request $request) 
     {
 
         // dd($request->all());
-      $productCode = $request['code'];
-        // $productCode = rand(1234567890,50);
+      $code = $request['code'];
+      $row = $request['row'];
+      $col = $request['col'];
+        
 
-        return view('barcode', [
-            'productCode' => $productCode
+        return view('show_barcode', [
+            'code' => $code, 'row'=>$row,'col'=>$col
         ]);
     }
+
+
 }
